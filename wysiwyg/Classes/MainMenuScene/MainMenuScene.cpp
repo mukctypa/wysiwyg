@@ -1,8 +1,8 @@
-#include "HelloWorldScene.h"
+#include "MainMenuScene.h"
 
 using namespace cocos2d;
 
-CCScene* HelloWorld::scene()
+CCScene* MainMenuScene::scene()
 {
     CCScene * scene = NULL;
     do 
@@ -12,7 +12,7 @@ CCScene* HelloWorld::scene()
         CC_BREAK_IF(! scene);
 
         // 'layer' is an autorelease object
-        HelloWorld *layer = HelloWorld::create();
+        MainMenuScene *layer = MainMenuScene::create();
         CC_BREAK_IF(! layer);
 
         // add layer as a child to scene
@@ -24,7 +24,7 @@ CCScene* HelloWorld::scene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool MainMenuScene::init()
 {
     bool bRet = false;
     do 
@@ -46,7 +46,7 @@ bool HelloWorld::init()
             "CloseNormal.png",
             "CloseSelected.png",
             this,
-            menu_selector(HelloWorld::menuCloseCallback));
+            menu_selector(MainMenuScene::menuCloseCallback));
         CC_BREAK_IF(! pCloseItem);
 
         // Place the menu item bottom-right conner.
@@ -89,7 +89,7 @@ bool HelloWorld::init()
     return bRet;
 }
 
-void HelloWorld::menuCloseCallback(CCObject* pSender)
+void MainMenuScene::menuCloseCallback(CCObject* pSender)
 {
     // "close" menu item clicked
     CCDirector::sharedDirector()->end();
