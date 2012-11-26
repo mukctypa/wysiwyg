@@ -46,11 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-<<<<<<< HEAD
-      <AdditionalIncludeDirectories>..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-=======
-      <AdditionalIncludeDirectories>..\Classes\MainMenuScene;..\Classes\GameScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> 922b6b1220a028211471c76beb0f0abff32e1585
+      <AdditionalIncludeDirectories>..\Classes\GameScene;..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
