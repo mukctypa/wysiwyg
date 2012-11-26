@@ -1,11 +1,11 @@
 #ifndef __MODELS__H__
 #define __MODELS__H__
 
-#include <list>
+#include <vector>
 
 class AbstractLetter;
 
-typedef std::list<AbstractLetter> LetterSequence;
+typedef std::vector<AbstractLetter> LetterSequence;
 
 //TODO: tmp part. move all settings and defines to separate header file
 #define SPECIAL_LETTER_CHARACTER	'*'
@@ -69,10 +69,6 @@ protected:
 public:
 	virtual bool validate( const Word & rhs )
 	{
-		LetterSequence * rhs_letters = rhs.getLetters();
-		if ( this->m_letters->size() != rhs_letters->size() )
-			return false;	
-		//TODO
 		return true;
 	}
 

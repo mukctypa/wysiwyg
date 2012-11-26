@@ -2,6 +2,9 @@
 #include "AppDelegate.h"
 #include "CCEGLView.h"
 
+//TODO: tmp include, remove it
+#include "Models.h"
+
 USING_NS_CC;
 
 // uncomment below line, open debug console

@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
