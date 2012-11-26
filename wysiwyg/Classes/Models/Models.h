@@ -5,7 +5,7 @@
 
 class AbstractLetter;
 
-typedef std::vector<AbstractLetter> LetterSequence;
+typedef std::vector<AbstractLetter*> LetterSequence;
 
 //TODO: tmp part. move all settings and defines to separate header file
 #define SPECIAL_LETTER_CHARACTER	'*'
@@ -69,6 +69,13 @@ protected:
 public:
 	virtual bool validate( const Word & rhs )
 	{
+		LetterSequence * rhs_letters = rhs.getLetters();
+		if ( this->m_letters->size() != rhs_letters->size() )
+			return false;
+		//now compare each letter
+		for ( size_t i = 0; i < rhs_letters->size(); i++ )
+			if ( rhs_letters->at( i )->validate( *this->m_letters->at( i ) ) != true )
+				return false;
 		return true;
 	}
 

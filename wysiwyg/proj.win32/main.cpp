@@ -2,9 +2,6 @@
 #include "AppDelegate.h"
 #include "CCEGLView.h"
 
-//TODO: tmp include, remove it
-#include "Models.h"
-
 USING_NS_CC;
 
 // uncomment below line, open debug console
@@ -24,7 +21,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     freopen("CONOUT$", "w", stdout);
     freopen("CONOUT$", "w", stderr);
 #endif
-
     // create the application instance
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();

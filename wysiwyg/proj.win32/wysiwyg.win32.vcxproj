@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Classes\GameScene;..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes\GameEngine;..\Classes\Utils;..\Classes\GameScene;..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\pthread;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -63,7 +63,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(COCOS_HOME)$(Configuration).win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcocos2d.lib;libExtensions.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcocos2d.lib;libExtensions.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -85,7 +85,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes\GameEngine;..\Classes\Utils;..\Classes\GameScene;..\Classes\Models;..\Classes\MainMenuScene;..\Classes;.;$(COCOS_HOME)cocos2dx;$(COCOS_HOME)cocos2dx\include;$(COCOS_HOME)cocos2dx\kazmath\include;$(COCOS_HOME)cocos2dx\platform\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32;$(COCOS_HOME)cocos2dx\platform\third_party\win32\pthread;$(COCOS_HOME)cocos2dx\platform\third_party\win32\OGLES;$(COCOS_HOME)external;$(COCOS_HOME)CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -101,7 +101,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalLibraryDirectories>$(COCOS_HOME)$(Configuration).win32\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcocos2d.lib;libExtensions.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcocos2d.lib;libExtensions.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;pthreadVCE2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -132,14 +132,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\GameEngine\GameEngine.h" />
     <ClInclude Include="..\Classes\GameScene\GameScene.h" />
     <ClInclude Include="..\Classes\MainMenuScene\MainMenuScene.h" />
+    <ClInclude Include="..\Classes\Models\Events.h" />
     <ClInclude Include="..\Classes\Models\Models.h" />
+    <ClInclude Include="..\Classes\Utils\MessageBus.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\GameEngine\GameEngine.cpp" />
     <ClCompile Include="..\Classes\GameScene\GameScene.cpp" />
     <ClCompile Include="..\Classes\MainMenuScene\MainMenuScene.cpp" />
     <ClCompile Include="main.cpp" />
