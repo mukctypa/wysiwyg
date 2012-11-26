@@ -10,8 +10,13 @@ public:
 
     static cocos2d::CCScene* scene();
     
+
+	//play game callback
+	void menuPlayeCallback( CCObject * pSender );
+
+
     // a selector callback
-    //void menuCloseCallback(CCObject* pSender);
+    void menuCloseCallback(CCObject* pSender);
 
     // implement the "static node()" method manually
     CREATE_FUNC( GameScene );
