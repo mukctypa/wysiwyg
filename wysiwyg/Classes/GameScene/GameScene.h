@@ -14,6 +14,7 @@ public:
 	//play game callback
 	void menuPlayeCallback( CCObject * pSender );
 
+	void addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName );
 
     // a selector callback
     void menuCloseCallback(CCObject* pSender);

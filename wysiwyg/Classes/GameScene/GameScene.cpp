@@ -64,3 +64,20 @@ void GameScene::menuPlayeCallback( CCObject * pSender )
 	return;
 }
     
+
+//now x and y are ignored
+//TODO: translate it to real coords
+void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName )
+{
+	assert( x < 4 );
+	assert( y < 5 );
+	assert( spriteName != NULL );
+
+	CCSprite * pSprite = CCSprite::create( spriteName );
+
+	pSprite->setPosition( ccp( 100, 100 ) );
+
+	this->addChild( pSprite );
+
+	return;
+}
