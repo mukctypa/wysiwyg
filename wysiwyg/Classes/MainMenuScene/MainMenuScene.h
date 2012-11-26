@@ -19,6 +19,9 @@ public:
     // a selector callback
     void menuCloseCallback(CCObject* pSender);
 
+	//play game callback
+	void menuPlayeCallback( CCObject * pSender );
+
     // implement the "static node()" method manually
     CREATE_FUNC(MainMenuScene);
 };

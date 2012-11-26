@@ -6,6 +6,7 @@
 
 using namespace CocosDenshion;
 
+//test
 USING_NS_CC;
 
 AppDelegate::AppDelegate()
