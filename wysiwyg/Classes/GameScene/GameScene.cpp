@@ -6,12 +6,18 @@ using namespace cocos2d;
 
 //tmp: remove
 #include <iostream>
+#include <random>
+#include <fstream>
+#include <list>
+#include <algorithm>
+#include <sstream> 
 
 #define MSG_LETTER_DROP "letter_drop"
 
 GameScene::GameScene()
 {
 	this->m_pTargetSprite = CCSprite::create( "drop.png" );
+	m_letters = "ABCDEFGHIJKLNMNOPQRSTVWXYZ****";
 }
 
 bool GameScene::init()
@@ -49,25 +55,21 @@ bool GameScene::init()
 
 	//this->addChild( pLabel );
 
-	addSpriteAtPosition( 0, 0, "A.png" );
-	addSpriteAtPosition( 1, 0, "A.png" );
-	addSpriteAtPosition( 2, 0, "A.png" );
-	addSpriteAtPosition( 3, 0, "A.png" );
+	//get 16 letters
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> rand( 0, this->m_letters.size() - 1 );
+	for ( int i = 0; i < 4; i++ )
+		for ( int j = 0; j < 4; j++ )
+		{
+			int k = rand( generator );
+			AbstractLetter * letter;
+			if ( m_letters[k] != '*' )
+				letter = new NormalLetter( m_letters[k] );
+			else
+				letter = new SpecialLetter();
 
-	addSpriteAtPosition( 0, 1, "A.png" );
-	addSpriteAtPosition( 1, 1, "A.png" );
-	addSpriteAtPosition( 2, 1, "A.png" );
-	addSpriteAtPosition( 3, 1, "A.png" );
-
-	addSpriteAtPosition( 0, 2, "A.png" );
-	addSpriteAtPosition( 1, 2, "A.png" );
-	addSpriteAtPosition( 2, 2, "A.png" );
-	addSpriteAtPosition( 3, 2, "A.png" );
-
-	addSpriteAtPosition( 0, 3, "A.png" );
-	addSpriteAtPosition( 1, 3, "A.png" );
-	addSpriteAtPosition( 2, 3, "A.png" );
-	addSpriteAtPosition( 3, 3, "A.png" );
+			this->addSpriteAtPosition( i, j, letter );
+		}
 
 	this->m_pTargetSprite->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width / 2 - 100, CCDirector::sharedDirector()->getWinSize().height - 20  ) );
 
@@ -79,10 +81,25 @@ bool GameScene::init()
 	this->addChild( this->m_pSelectedLettersLabel );
 
 	this->addChild( this->m_pTargetSprite );
+
+	this->m_points = 0;
+	this->m_pPointsLabel = CCLabelTTF::create( "0", "Arial", 24 );
+	this->m_pPointsLabel->setPosition( ccp( CCDirector::sharedDirector()->getWinSize().width / 2, 20 ) );
+	this->addChild( this->m_pPointsLabel );
 	
 	
 	CCNotificationCenter::sharedNotificationCenter()->addObserver( this, callfuncO_selector(GameScene::dragAndDropListner), MSG_LETTER_DROP, NULL );
 
+	std::fstream file("English.txt");
+
+	while ( !file.eof() )
+	{
+		std::string str; 
+		std::getline(file, str);
+		std::transform(str.begin(), str.end(),str.begin(), ::toupper);
+		my_list.push_back( Word(str) );
+
+	}
 
 	return true;
 }
@@ -111,7 +128,18 @@ CCScene* GameScene::scene()
 
 void GameScene::menuOkCallback( CCObject * pSender )
 {
-	//TODO
+	if ( this->m_selectedLetters.size() == 0 )
+		return;
+	Word to_validate( &this->m_selectedLetters );
+	for ( std::list<Word>::iterator it = my_list.begin(); it != my_list.end(); ++it )
+	{ 
+		if (  it->validate( to_validate) )
+		{
+			this->m_points += to_validate.getPoints();
+			this->updatePoints();
+			return;
+		}
+	}
 	return;
 }
 
@@ -125,14 +153,11 @@ void GameScene::menuClearCallback( CCObject * pSender )
 
     
 
-void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName )
+void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, AbstractLetter * letter )
 {
 	assert( x < 4 );
 	assert( y < 4 );
-	assert( spriteName != NULL );
-
-	//TODO: tmp
-	NormalLetter * letter = new NormalLetter( 'A' );
+	assert( letter != NULL );
 
 	LetterSprite * pSprite = LetterSprite::initWithLetter( this->m_pTargetSprite, letter );
 
@@ -149,7 +174,6 @@ void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spri
 void GameScene::dragAndDropListner( CCObject * obj )
 {
 	AbstractLetter * letter = (AbstractLetter*)obj;
-	//std::cout << "drag and drop listner:" << letter->getRepresentation() << " " << std::endl;
 	this->m_selectedLetters.push_back( letter );
 	this->updateSelectedLetters();
 }
@@ -167,6 +191,19 @@ void GameScene::updateSelectedLetters()
 	this->m_pSelectedLettersLabel->setString( text.c_str() );
 }
 
+std::string convertInt(int number)
+{
+	std::stringstream ss;
+	ss << number;
+	return ss.str();
+} 
+
+void GameScene::updatePoints()
+{
+	std::string points = convertInt( this->m_points );
+	this->m_pPointsLabel->setString( points.c_str() );
+	return;
+}
 
 void GameScene::engineLogic()
 {

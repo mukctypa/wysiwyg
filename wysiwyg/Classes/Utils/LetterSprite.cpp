@@ -22,6 +22,11 @@ LetterSprite* LetterSprite::initWithLetter( CCSprite * pTargetSprite, const Abst
 	LetterSprite* pSprite = new LetterSprite( pTargetSprite, letter );
 	char l = letter->getRepresentation();
 	std::string fileName = std::string(	&l, 1);
+	
+	//TODO: bad bad bad :(
+	if ( fileName == "*" ) 
+		fileName = "asterisk";
+
 	fileName.append( ".png" );
 	CCTexture2D* pTexture = CCTextureCache::sharedTextureCache()->addImage( fileName.c_str() ); 
 	pSprite->initWithTexture( pTexture );
@@ -70,15 +75,7 @@ bool LetterSprite::ccTouchBegan(CCTouch* touch, CCEvent* event)
 
 void LetterSprite::ccTouchMoved(CCTouch* touch, CCEvent* event)
 {
-    // If it weren't for the TouchDispatcher, you would need to keep a reference
-    // to the touch from touchBegan and check that the current touch is the same
-    // as that one.
-    // Actually, it would be even more complicated since in the Cocos dispatcher
-    // you get CCSets instead of 1 UITouch, so you'd need to loop through the set
-    // in each touchXXX method.
-    
-    CCAssert(m_state == kPaddleStateGrabbed, L"Paddle - Unexpected state!");    
-    
+   
     CCPoint touchPoint = touch->getLocation();
     
     setPosition( ccp(touchPoint.x, touchPoint.y) );

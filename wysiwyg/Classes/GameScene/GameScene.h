@@ -16,7 +16,14 @@ protected:
 	CCLabelTTF * m_pPointsLabel;
 	
 	void updateSelectedLetters();
-    
+	void updatePoints();
+
+	//TODO
+	std::string m_letters; 
+	std::list<Word> my_list;
+
+	unsigned int m_points;
+
 public:
 	virtual bool init();  
 	GameScene();
@@ -30,7 +37,7 @@ public:
 	//clear callback
 	void menuClearCallback( CCObject * pSender );
 
-	void addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName );
+	void addSpriteAtPosition( unsigned int x, unsigned int y, AbstractLetter * letter );
 
     // a selector callback
     void menuCloseCallback(CCObject* pSender);

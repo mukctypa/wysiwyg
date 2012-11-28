@@ -59,6 +59,11 @@ public:
 	{
 		return true;	//our special letter matches everything!
 	}
+
+	virtual unsigned int getPoints() const
+	{
+		return DEFAULT_POINTS_FOR_LETTER / 2;
+	}
 };
 
 
@@ -67,6 +72,8 @@ class Word
 protected:
 	LetterSequence * m_letters;
 public:
+	//TODO
+	~Word() {}
 	virtual bool validate( const Word & rhs )
 	{
 		LetterSequence * rhs_letters = rhs.getLetters();
@@ -82,6 +89,31 @@ public:
 	LetterSequence * getLetters() const
 	{
 		return this->m_letters;
+	}
+
+	Word( const std::string str )
+	{
+		if ( str.size() > 0 )
+			this->m_letters = new LetterSequence();
+		else
+			return;
+		for ( size_t i = 0; i < str.size(); i++ )
+			this->m_letters->push_back( new NormalLetter( str[i] ) );
+	}
+
+	Word( LetterSequence * seq )
+	{
+		this->m_letters = seq;
+	}
+
+	unsigned int getPoints()
+	{
+		unsigned int points = 0;
+
+		for ( LetterSequence::iterator it = this->m_letters->begin(); it != this->m_letters->end(); ++it )
+			points += (*it)->getPoints();
+
+		return points;
 	}
 };
 
