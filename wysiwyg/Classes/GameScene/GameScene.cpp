@@ -12,6 +12,8 @@ using namespace cocos2d;
 #include <algorithm>
 #include <sstream> 
 
+#include <time.h>
+
 #define MSG_LETTER_DROP "letter_drop"
 
 GameScene::GameScene()
@@ -56,7 +58,7 @@ bool GameScene::init()
 	//this->addChild( pLabel );
 
 	//get 16 letters
-	std::default_random_engine generator;
+	std::default_random_engine generator( (unsigned int)time(0) );
 	std::uniform_int_distribution<int> rand( 0, this->m_letters.size() - 1 );
 	for ( int i = 0; i < 4; i++ )
 		for ( int j = 0; j < 4; j++ )
