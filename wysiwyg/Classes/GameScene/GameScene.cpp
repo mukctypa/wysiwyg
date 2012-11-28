@@ -1,7 +1,13 @@
 #include "cocos2d.h"
 #include "GameScene.h"
+#include "LetterSprite.h"
 
 using namespace cocos2d;
+
+GameScene::GameScene()
+{
+	this->m_pTargetSprite = CCSprite::create( "drop.png" );
+}
 
 bool GameScene::init()
 {
@@ -11,25 +17,58 @@ bool GameScene::init()
 		"Arial",
 		10 );*/
 
-	CCMenuItemImage * pPlayeItem = CCMenuItemImage::create(
-			"play.png",
-			"play_tapped.png",
+	CCMenuItemImage * pOkItem = CCMenuItemImage::create(
+			"ok.png",
+			"ok_tapped.png",
 			this,
-			menu_selector(GameScene::menuPlayeCallback) );
+			menu_selector(GameScene::menuOkCallback) );
+
+	CCMenuItemImage * pCancelItem = CCMenuItemImage::create(
+			"clear.png",
+			"clear_tapped.png",
+			this,
+			menu_selector(GameScene::menuOkCallback) );
 
 	//pLabel->setPosition( ccp( 100, 100 ) );
 
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
-	pPlayeItem->setPosition( CCPointZero );
+	pOkItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
 
-	CCMenu* pMenu = CCMenu::create(pPlayeItem, NULL);
-    pMenu->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
+	pCancelItem->setPosition( ccp(20, 20) );
+
+
+	CCMenu* pMenu = CCMenu::create(pOkItem, pCancelItem, NULL);
+    pMenu->setPosition( CCPointZero );
   
 	this->addChild(pMenu, 1);
 
 	//this->addChild( pLabel );
 
+	addSpriteAtPosition( 0, 0, "A.png" );
+	addSpriteAtPosition( 1, 0, "A.png" );
+	addSpriteAtPosition( 2, 0, "A.png" );
+	addSpriteAtPosition( 3, 0, "A.png" );
 
+	addSpriteAtPosition( 0, 1, "A.png" );
+	addSpriteAtPosition( 1, 1, "A.png" );
+	addSpriteAtPosition( 2, 1, "A.png" );
+	addSpriteAtPosition( 3, 1, "A.png" );
+
+	addSpriteAtPosition( 0, 2, "A.png" );
+	addSpriteAtPosition( 1, 2, "A.png" );
+	addSpriteAtPosition( 2, 2, "A.png" );
+	addSpriteAtPosition( 3, 2, "A.png" );
+
+	addSpriteAtPosition( 0, 3, "A.png" );
+	addSpriteAtPosition( 1, 3, "A.png" );
+	addSpriteAtPosition( 2, 3, "A.png" );
+	addSpriteAtPosition( 3, 3, "A.png" );
+
+	this->m_pTargetSprite->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width / 2 - 100, CCDirector::sharedDirector()->getWinSize().height - 20  ) );
+
+	//this->m_pTargetSprite->setPosition( ccp(0, 0) );
+	
+	this->addChild( this->m_pTargetSprite );
 
 	return true;
 }
@@ -50,32 +89,38 @@ CCScene* GameScene::scene()
         // add layer as a child to scene
         scene->addChild(layer);
     } while (0);
+	
 
     // return the scene
     return scene;
 }
 
-void GameScene::menuPlayeCallback( CCObject * pSender )
+void GameScene::menuOkCallback( CCObject * pSender )
 {
-	CCScene * pScene = GameScene::scene();
-
-	CCDirector::sharedDirector()->replaceScene( pScene );
-
+	//TODO
 	return;
 }
+
+
+void GameScene::menuClearCallback( CCObject * pSender )
+{
+	//TODO
+	return;
+}
+
     
 
-//now x and y are ignored
-//TODO: translate it to real coords
 void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName )
 {
 	assert( x < 4 );
-	assert( y < 5 );
+	assert( y < 4 );
 	assert( spriteName != NULL );
 
-	CCSprite * pSprite = CCSprite::create( spriteName );
+	LetterSprite * pSprite = LetterSprite::initWithLetter( "A.png", this->m_pTargetSprite );
 
-	pSprite->setPosition( ccp( 100, 100 ) );
+	pSprite->setPosition( ccp( x * 72 + 17 + 72 / 2, y * 85 + 25 + 80 ) );
+
+
 
 	this->addChild( pSprite );
 

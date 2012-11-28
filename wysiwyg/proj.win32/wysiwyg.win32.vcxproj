@@ -55,7 +55,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;USE_WIN32_CONSOLE;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -137,6 +137,7 @@
     <ClInclude Include="..\Classes\MainMenuScene\MainMenuScene.h" />
     <ClInclude Include="..\Classes\Models\Events.h" />
     <ClInclude Include="..\Classes\Models\Models.h" />
+    <ClInclude Include="..\Classes\Utils\LetterSprite.h" />
     <ClInclude Include="..\Classes\Utils\MessageBus.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="..\Classes\GameEngine\GameEngine.cpp" />
     <ClCompile Include="..\Classes\GameScene\GameScene.cpp" />
     <ClCompile Include="..\Classes\MainMenuScene\MainMenuScene.cpp" />
+    <ClCompile Include="..\Classes\Utils\LetterSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

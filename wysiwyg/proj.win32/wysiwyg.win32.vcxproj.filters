@@ -61,6 +61,9 @@
     <ClInclude Include="..\Classes\GameEngine\GameEngine.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Utils\LetterSprite.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,6 +79,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameEngine\GameEngine.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils\LetterSprite.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

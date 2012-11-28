@@ -2,17 +2,25 @@
 #define _GAME_SCENE_H__
 
 #include "cocos2d.h"
+using namespace cocos2d;
 
 class GameScene : public cocos2d::CCLayer
 {
+protected:
+	CCSprite * m_pTargetSprite;
+    
 public:
-    virtual bool init();  
+	virtual bool init();  
+	GameScene();
 
     static cocos2d::CCScene* scene();
     
 
-	//play game callback
-	void menuPlayeCallback( CCObject * pSender );
+	//ok callback
+	void menuOkCallback( CCObject * pSender );
+	
+	//clear callback
+	void menuClearCallback( CCObject * pSender );
 
 	void addSpriteAtPosition( unsigned int x, unsigned int y, char * spriteName );
 
