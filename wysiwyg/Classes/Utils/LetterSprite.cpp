@@ -1,7 +1,9 @@
 #include "LetterSprite.h"
 #include <iostream>
 
-LetterSprite::LetterSprite( CCSprite * pTargetSprite ) : m_pTargetSprite( pTargetSprite )
+#define MSG_LETTER_DROP "letter_drop"
+
+LetterSprite::LetterSprite( CCSprite * pTargetSprite, const AbstractLetter * letter ) : m_pTargetSprite( pTargetSprite ), m_pLetter( letter )
 {
 }
 
@@ -15,9 +17,12 @@ CCRect LetterSprite::rect()
     return CCRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
-LetterSprite* LetterSprite::initWithLetter( const std::string & fileName, CCSprite * pTargetSprite )
+LetterSprite* LetterSprite::initWithLetter( CCSprite * pTargetSprite, const AbstractLetter * letter )
 {
-	LetterSprite* pSprite = new LetterSprite( pTargetSprite );
+	LetterSprite* pSprite = new LetterSprite( pTargetSprite, letter );
+	char l = letter->getRepresentation();
+	std::string fileName = std::string(	&l, 1);
+	fileName.append( ".png" );
 	CCTexture2D* pTexture = CCTextureCache::sharedTextureCache()->addImage( fileName.c_str() ); 
 	pSprite->initWithTexture( pTexture );
 	pSprite->autorelease();
@@ -94,8 +99,9 @@ void LetterSprite::ccTouchEnded(CCTouch* touch, CCEvent* event)
 	if ( this->m_pTargetSprite->boundingBox().containsPoint( touch->getLocation() ) )
 	{
 		std::cout << "Letter sprite is on target!" << std::endl;
-		//TODO: add logic here
+		CCNotificationCenter::sharedNotificationCenter()->postNotification( MSG_LETTER_DROP, (CCObject*)this->m_pLetter);
 		this->setVisible( false );
+
 	}
 } 
 

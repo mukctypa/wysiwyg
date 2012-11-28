@@ -4,6 +4,11 @@
 
 using namespace cocos2d;
 
+//tmp: remove
+#include <iostream>
+
+#define MSG_LETTER_DROP "letter_drop"
+
 GameScene::GameScene()
 {
 	this->m_pTargetSprite = CCSprite::create( "drop.png" );
@@ -27,7 +32,7 @@ bool GameScene::init()
 			"clear.png",
 			"clear_tapped.png",
 			this,
-			menu_selector(GameScene::menuOkCallback) );
+			menu_selector(GameScene::menuClearCallback) );
 
 	//pLabel->setPosition( ccp( 100, 100 ) );
 
@@ -68,7 +73,16 @@ bool GameScene::init()
 
 	//this->m_pTargetSprite->setPosition( ccp(0, 0) );
 	
+
+	this->m_pSelectedLettersLabel = CCLabelTTF::create( "", "Arial", 24 );
+	this->m_pSelectedLettersLabel->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width / 2 + 75, CCDirector::sharedDirector()->getWinSize().height - 20 ) );
+	this->addChild( this->m_pSelectedLettersLabel );
+
 	this->addChild( this->m_pTargetSprite );
+	
+	
+	CCNotificationCenter::sharedNotificationCenter()->addObserver( this, callfuncO_selector(GameScene::dragAndDropListner), MSG_LETTER_DROP, NULL );
+
 
 	return true;
 }
@@ -103,8 +117,9 @@ void GameScene::menuOkCallback( CCObject * pSender )
 
 
 void GameScene::menuClearCallback( CCObject * pSender )
-{
-	//TODO
+{	
+	this->m_selectedLetters.clear();
+	this->updateSelectedLetters();
 	return;
 }
 
@@ -116,7 +131,10 @@ void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spri
 	assert( y < 4 );
 	assert( spriteName != NULL );
 
-	LetterSprite * pSprite = LetterSprite::initWithLetter( "A.png", this->m_pTargetSprite );
+	//TODO: tmp
+	NormalLetter * letter = new NormalLetter( 'A' );
+
+	LetterSprite * pSprite = LetterSprite::initWithLetter( this->m_pTargetSprite, letter );
 
 	pSprite->setPosition( ccp( x * 72 + 17 + 72 / 2, y * 85 + 25 + 80 ) );
 
@@ -125,4 +143,32 @@ void GameScene::addSpriteAtPosition( unsigned int x, unsigned int y, char * spri
 	this->addChild( pSprite );
 
 	return;
+}
+
+
+void GameScene::dragAndDropListner( CCObject * obj )
+{
+	AbstractLetter * letter = (AbstractLetter*)obj;
+	//std::cout << "drag and drop listner:" << letter->getRepresentation() << " " << std::endl;
+	this->m_selectedLetters.push_back( letter );
+	this->updateSelectedLetters();
+}
+
+void GameScene::updateSelectedLetters()
+{
+	std::string text = "";
+
+	for ( LetterSequence::iterator it = this->m_selectedLetters.begin(); it != this->m_selectedLetters.end(); ++it )
+	{
+		char l = (*it)->getRepresentation();
+		text += std::string( &l, 1);
+	}
+
+	this->m_pSelectedLettersLabel->setString( text.c_str() );
+}
+
+
+void GameScene::engineLogic()
+{
+	//TODO
 }

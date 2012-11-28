@@ -33,6 +33,7 @@ void GameEngine::logic()
 		case InGame:
 		{
 			//check if game field is not full
+			break;
 		}
 	}
 }

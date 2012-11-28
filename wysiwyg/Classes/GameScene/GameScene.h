@@ -2,12 +2,20 @@
 #define _GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include <string>
 using namespace cocos2d;
+
+#include "Models.h"
 
 class GameScene : public cocos2d::CCLayer
 {
 protected:
 	CCSprite * m_pTargetSprite;
+	LetterSequence m_selectedLetters;
+	CCLabelTTF * m_pSelectedLettersLabel;
+	CCLabelTTF * m_pPointsLabel;
+	
+	void updateSelectedLetters();
     
 public:
 	virtual bool init();  
@@ -29,6 +37,10 @@ public:
 
     // implement the "static node()" method manually
     CREATE_FUNC( GameScene );
+
+	void dragAndDropListner( CCObject * obj );
+
+	void engineLogic();
 };
 
 

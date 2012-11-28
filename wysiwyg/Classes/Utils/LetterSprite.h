@@ -2,6 +2,7 @@
 #define _PADDLE_H_
 
 #include "cocos2d.h"
+#include "Models.h"
 
 USING_NS_CC;
 
@@ -15,9 +16,10 @@ class LetterSprite : public CCSprite, public CCTargetedTouchDelegate
 {
     PaddleState        m_state;
 	CCSprite * m_pTargetSprite;
+	const AbstractLetter * m_pLetter;
 
 public:
-    LetterSprite( CCSprite * m_pTargetSprite );
+    LetterSprite( CCSprite * m_pTargetSprite, const AbstractLetter * letter );
     virtual ~LetterSprite(void);
 
     CCRect rect();
@@ -35,7 +37,7 @@ public:
     virtual void touchDelegateRelease();
 
 	//TODO: replace std::string file name with real letter
-	static LetterSprite * initWithLetter( const std::string & fileName, CCSprite * m_pTargetSprite );
+	static LetterSprite * initWithLetter( CCSprite * m_pTargetSprite, const AbstractLetter * letter );
 
 	bool initWithTexture(CCTexture2D* aTexture); 
 };
