@@ -139,6 +139,7 @@ void GameScene::menuOkCallback( CCObject * pSender )
 		{
 			this->m_points += to_validate.getPoints();
 			this->updatePoints();
+			this->menuClearCallback( this );
 			return;
 		}
 	}
