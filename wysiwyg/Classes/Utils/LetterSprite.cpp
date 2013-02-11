@@ -3,7 +3,7 @@
 
 #define MSG_LETTER_DROP "letter_drop"
 
-LetterSprite::LetterSprite( CCSprite * pTargetSprite, const AbstractLetter * letter ) : m_pTargetSprite( pTargetSprite ), m_pLetter( letter )
+LetterSprite::LetterSprite( CCSprite * pTargetSprite,  AbstractLetter * letter ) : m_pTargetSprite( pTargetSprite ), m_pLetter( letter )
 {
 }
 
@@ -17,7 +17,7 @@ CCRect LetterSprite::rect()
     return CCRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
-LetterSprite* LetterSprite::initWithLetter( CCSprite * pTargetSprite, const AbstractLetter * letter )
+LetterSprite* LetterSprite::initWithLetter( CCSprite * pTargetSprite, AbstractLetter * letter )
 {
 	LetterSprite* pSprite = new LetterSprite( pTargetSprite, letter );
 	char l = letter->getRepresentation();
@@ -96,7 +96,7 @@ void LetterSprite::ccTouchEnded(CCTouch* touch, CCEvent* event)
 	if ( this->m_pTargetSprite->boundingBox().containsPoint( touch->getLocation() ) )
 	{
 		std::cout << "Letter sprite is on target!" << std::endl;
-		CCNotificationCenter::sharedNotificationCenter()->postNotification( MSG_LETTER_DROP, (CCObject*)this->m_pLetter);
+		CCNotificationCenter::sharedNotificationCenter()->postNotification( MSG_LETTER_DROP, (CCObject*)this);
 		this->setVisible( false );
 
 	}

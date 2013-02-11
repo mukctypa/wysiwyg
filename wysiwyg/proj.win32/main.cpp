@@ -2,6 +2,8 @@
 #include "AppDelegate.h"
 #include "CCEGLView.h"
 
+#include "cocos2d.h"
+
 USING_NS_CC;
 
 // uncomment below line, open debug console

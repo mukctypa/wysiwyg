@@ -3,6 +3,13 @@
 
 using namespace cocos2d;
 
+MainMenuScene::MainMenuScene()
+{
+	CCSprite * background_menu = CCSprite::create( "BG_MM.png" );
+	this->addChild( background_menu );
+	this->setPosition( ccp( CCDirector::sharedDirector()->getWinSize().width /2 , CCDirector::sharedDirector()->getWinSize().height / 2 ) );
+}
+
 CCScene* MainMenuScene::scene()
 {
     CCScene * scene = NULL;
@@ -18,6 +25,9 @@ CCScene* MainMenuScene::scene()
 
         // add layer as a child to scene
         scene->addChild(layer);
+
+		
+	    
     } while (0);
 
     // return the scene
@@ -71,10 +81,11 @@ bool MainMenuScene::init()
 
         // Place the menu item bottom-right conner.
         pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
+		pCloseItem->setPosition(ccp(130, -200));
 
 		CCSize size = CCDirector::sharedDirector()->getWinSize();
-		pPlayeItem->setPosition( ccp( size.width/2, size.height/2 ) );
-
+		//pPlayeItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width / 2, CCDirector::sharedDirector()->getWinSize().height/2 ) );
+		pPlayeItem->setPosition( CCPointZero );
         // Create a menu with the "close" menu item, it's an auto release object.
 		CCMenu* pMenu = CCMenu::create(pCloseItem, pPlayeItem, NULL);
         pMenu->setPosition(CCPointZero);
